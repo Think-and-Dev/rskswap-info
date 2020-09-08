@@ -10,13 +10,11 @@ import "./TokenPoolDetails.css";
 
 class TokenPoolDetails extends Component {
   render() {
-    var tokenLink =
-      "https://www.etherscan.io/address/" + this.props.tokenAddress;
-    var exchangeLink =
-      "https://www.etherscan.io/address/" + this.props.exchangeAddress;
+    const tokensList = this.props.tokensList;
+    const explorerLink = "https://explorer.rsk.co/address/";
 
-    var accruedFees =
-      this.props.myCollectedEthFees + this.props.myCollectedTokenFees;
+    var accruedFees = 0
+      //this.props.myCollectedEthFees + this.props.myCollectedTokenFees;
 
     if (accruedFees.length === 0) {
       accruedFees = "-";
@@ -27,65 +25,50 @@ class TokenPoolDetails extends Component {
         ? ("1 ETH = " + this.props.exchangeRate.toFixed(4) + " " + this.props.curSymbol)
         : "-";
 
-    const data = [
-      {
-        symbol: this.props.curSymbol,
-        token: this.props.tokenAddress,
-        exchange: this.props.exchangeAddress,
-        poolSize: this.props.curEthPoolTotal,
-        poolSizeToken: this.props.curTokenPoolTotal,
+    let data = []
+    for(const pair of this.props.pairsList) {
+
+      data.push({
+        pair: tokensList[pair.token0].symbol + ' - ' + tokensList[pair.token1].symbol,
+        address: pair.address,
+        addressLink: explorerLink + pair.address,
+        poolSizeToken0: (pair.reserveToken0 / Math.pow(10,tokensList[pair.token0].decimals)).toFixed(4) + ' ' + tokensList[pair.token0].symbol,
+        poolSizeToken1: (pair.reserveToken1 / Math.pow(10,tokensList[pair.token1].decimals)).toFixed(4) + ' ' + tokensList[pair.token1].symbol,
         poolShare: this.props.curPoolShare,
         accruedFees: accruedFees,
         rate: rateDisplay
-      }
-    ];
-
-    var headerTokenLiquidity = "Liquidity (" + this.props.curSymbol + ")";
+      });
+    };
 
     const columns = [
       {
-        Header: "Symbol",
-        accessor: "symbol",
+        Header: "Pair",
+        accessor: "pair",
         Cell: row => <b>{row.value}</b>,
         maxWidth: 100
       },
       {
-        Header: "Token",
-        accessor: "token",
+        Header: "Address",
+        accessor: "address",
         Cell: row => (
-          <a href={tokenLink} rel="noopener noreferrer" target="_blank">
-            <div className="truncate">{row.value}</div>
+          <a href={row.original.addressLink} rel="noopener noreferrer" target="_blank">
+            <div>{row.value}</div>
           </a>
         )
       },
       {
-        Header: "Exchange",
-        accessor: "exchange",
-        Cell: row => (
-          <div
-            style={{
-              padding: "2px"
-            }}
-          >
-            <a href={exchangeLink} rel="noopener noreferrer" target="_blank">
-              <div className="truncate">{row.value}</div>
-            </a>
-          </div>
-        )
+        Header: "Pool Size",
+        accessor: "poolSizeToken0",
+        className: "right"
+      },
+      {
+        Header: "Pool Size",
+        accessor: "poolSizeToken1",
+        className: "right"
       },
       {
         Header: "Rate",
         accessor: "rate",
-        className: "right"
-      },
-      {
-        Header: "Liquidity (ETH)",
-        accessor: "poolSize",
-        className: "right"
-      },
-      {
-        Header: headerTokenLiquidity,
-        accessor: "poolSizeToken",
         className: "right"
       },
       {

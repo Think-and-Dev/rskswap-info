@@ -13,7 +13,7 @@ export const Logo = () => (
       lineHeight: "1.75rem"
     }}
   >
-    <Emoji symbol="🦄" label="Unicorn" />
+    <Emoji symbol="favicon.ico" label="RskSwap"/>
   </div>
 );
 
@@ -27,7 +27,7 @@ export const Title = () => (
       lineHeight: "1.5rem"
     }}
   >
-    <span>Info</span>
+    <span>Rsk Swap Info</span>
   </div>
 );
 

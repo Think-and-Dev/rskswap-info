@@ -25,9 +25,9 @@ class TokenPoolHistory extends Component {
     const data = [];
 
     this.props.eventList.forEach(e => {
-      var txLink = "https://etherscan.io/tx/" + e.tx;
-      var blockLink = "https://etherscan.io/block/" + e.block;
-      var providerLink = "https://etherscan.io/address/" + e.provider;
+      var txLink = "https://explorer.rsk.co/tx/" + e.tx;
+      var blockLink = "https://explorer.rsk.co/block/" + e.block;
+      var providerLink = "https://explorer.rsk.co/address/" + e.provider;
 
       var event = {
         event: e.type,

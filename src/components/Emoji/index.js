@@ -11,7 +11,7 @@ const Emoji = props => (
     aria-label={props.label ? props.label : ""}
     aria-hidden={props.label ? "false" : "true"}
   >
-    {props.symbol}
+    <img src={props.symbol} width="45px"></img>
   </span>
 );
 
