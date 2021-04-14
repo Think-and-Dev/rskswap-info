@@ -34,9 +34,9 @@ class TokenPoolDetails extends Component {
         addressLink: explorerLink + pair.address,
         poolSizeToken0: (pair.reserveToken0 / Math.pow(10,tokensList[pair.token0].decimals)).toFixed(4) + ' ' + tokensList[pair.token0].symbol,
         poolSizeToken1: (pair.reserveToken1 / Math.pow(10,tokensList[pair.token1].decimals)).toFixed(4) + ' ' + tokensList[pair.token1].symbol,
-        poolShare: this.props.curPoolShare,
-        accruedFees: accruedFees,
-        rate: rateDisplay
+        // poolShare: this.props.curPoolShare,
+        // accruedFees: accruedFees,
+        // rate: rateDisplay
       });
     };
 
@@ -66,21 +66,21 @@ class TokenPoolDetails extends Component {
         accessor: "poolSizeToken1",
         className: "right"
       },
-      {
-        Header: "Rate",
-        accessor: "rate",
-        className: "right"
-      },
-      {
-        Header: "Your Share",
-        accessor: "poolShare",
-        className: "right"
-      },
-      {
-        Header: "Your Fees",
-        accessor: "accruedFees",
-        className: "right"
-      }
+      // {
+      //   Header: "Rate",
+      //   accessor: "rate",
+      //   className: "right"
+      // },
+      // {
+      //   Header: "Your Share",
+      //   accessor: "poolShare",
+      //   className: "right"
+      // },
+      // {
+      //   Header: "Your Fees",
+      //   accessor: "accruedFees",
+      //   className: "right"
+      // }
     ];
 
     return (
@@ -88,10 +88,11 @@ class TokenPoolDetails extends Component {
         className="TokenPoolDetails"
         data={data}
         minRows={1}
-        showPagination={false}
-        sortable={false}
+        showPagination={true}
+        defaultPageSize={50}
+        sortable={true}
         columns={columns}
-        resizable={false}
+        resizable={true}
       />
     );
   }
