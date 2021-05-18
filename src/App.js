@@ -199,7 +199,7 @@ class App extends Component {
 
 const Web3Setter = props => {
   if (web3 === null) {
-    web3 = new Web3(Web3.givenProvider || 'http://public-node.rsk.co/')
+    web3 = new Web3(Web3.givenProvider || 'https://public-node.rsk.co/')
   }
   return <div />
 };
